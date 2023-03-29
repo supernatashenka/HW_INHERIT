@@ -1,6 +1,7 @@
 
 import java.util.Objects;
 public class Todos {
+
     public class Task {
         protected int id;
 
@@ -42,13 +43,13 @@ public class Todos {
 
     public class Epic extends Task {
 
-        public void main(String[] args) {
-
-        }
+        protected String [] subtasks;
 
 
-        public Epic ( int id, String[]subtasks){
+        public Epic ( int id, String[]Subtasks){
             super(id);
+
+
             /// String[] subtasks--- как заполнить свои данные
             // (не наследуемые от родительского класса), если это массив данных?
 
@@ -88,6 +89,6 @@ public class Todos {
         return tasks;
     }
 }
-}
+
 
 
