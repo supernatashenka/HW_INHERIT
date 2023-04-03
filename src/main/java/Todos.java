@@ -1,78 +1,15 @@
-
-import java.util.Objects;
 public class Todos {
 
-    public class Task {
-        protected int id;
+    private Task[] tasks = new Task[0]; // <- тут будут все задачи
 
-        public Task(int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Task task = (Task) o;
-            return id == task.id;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id);
-        }
-    }
-
-    public class SimpleTask extends Task {
-        protected String title;
-
-        public SimpleTask(int id, String title) {
-            super(id); // вызов родительского конструктора
-            this.title = title; // заполнение своих полей
-        }
-
-        public String getTitle() {
-            return title;
-        }
-    }
-
-
-    public class Epic extends Task {
-
-        protected String [] subtasks;
-
-
-        public Epic ( int id, String[]Subtasks){
-            super(id);
-
-
-            /// String[] subtasks--- как заполнить свои данные
-            // (не наследуемые от родительского класса), если это массив данных?
-
-
-        }
-    }
-
-
-    public class Meeting extends Task {
-        protected String topic;
-        protected String project;
-        protected String start;
-
-
-        public Meeting(int id, String topic, String project, String start) {
-            super(id);
-            this.topic = topic;
-            this.project = project;
-            this.start = start;
-        }
-    }
-
-    private Task[] tasks = new Task[0];
+    /**
+     * Вспомогательный метод для имитации добавления элемента в массив
+     *
+     * @param current Массив, в который мы хотим добавить элемент
+     * @param task    Элемент, который мы хотим добавить
+     * @return Возвращает новый массив, который выглядит как тот, что мы передали,
+     * но с добавлением нового элемента в конец
+     */
     private Task[] addToArray(Task[] current, Task task) {
         Task[] tmp = new Task[current.length + 1];
         for (int i = 0; i < current.length; i++) {
@@ -81,6 +18,12 @@ public class Todos {
         tmp[tmp.length - 1] = task;
         return tmp;
     }
+
+    /**
+     * Метод добавления задачи в список дел
+     *
+     * @param task Добавляемая задача
+     */
     public void add(Task task) { // <- вот здесь в параметре может лежать объект и вида SimpleTask, и вида Epic, и вида Meeting
         tasks = addToArray(tasks, task);
     }
@@ -88,7 +31,17 @@ public class Todos {
     public Task[] findAll() {
         return tasks;
     }
+
+    public Task[] search(String query) {
+        Task[] result = new Task[0]; // массив для ответа
+        for (Task task : tasks) { // перебираем все задачи
+            if (task.matches(query)) { // если задача подходит под запрос
+                result = addToArray(result, task); // добавляем её в массив ответа
+
+            }
+
+        }
+        return result;
+
+    }
 }
-
-
-
