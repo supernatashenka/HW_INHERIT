@@ -8,7 +8,7 @@ class TodosTest {
     public void shouldAddThreeTasksOfDifferentType() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
-        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         Meeting meeting = new Meeting(
@@ -24,7 +24,7 @@ class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] expected = { simpleTask, epic, meeting };
+        Task[] expected = {simpleTask, epic, meeting};
         Task[] actual = todos.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -33,7 +33,7 @@ class TodosTest {
     public void TestSearchInTodosWith1Match() {
         SimpleTask simpleTask = new SimpleTask(66, "Пойти на тренировку");
 
-        String[] subtasks = { "Масло", "Картошка", "Хлеб" };
+        String[] subtasks = {"Масло", "Картошка", "Хлеб"};
         Epic epic = new Epic(24, subtasks);
 
         Meeting meeting = new Meeting(
@@ -55,13 +55,14 @@ class TodosTest {
         Task[] actual = todos.search("Пойти");
 
 
-        Assertions.assertArrayEquals(expected,actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void TestSearchInTodosWith2Matches() {
         SimpleTask simpleTask = new SimpleTask(66, "Перестать поглощать хлеб");
 
-        String[] subtasks = { "масло", "картошка", "хлеб" };
+        String[] subtasks = {"масло", "картошка", "хлеб"};
         Epic epic = new Epic(24, subtasks);
 
         Meeting meeting = new Meeting(
@@ -78,12 +79,12 @@ class TodosTest {
         todos.add(meeting);
 
 
-        Task[] expected = {simpleTask,epic};
+        Task[] expected = {simpleTask, epic};
 
         Task[] actual = todos.search("хлеб");
 
 
-        Assertions.assertArrayEquals(expected,actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
 }
